@@ -1,0 +1,28 @@
+# VPN WIREGUARD
+services:
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: c_vpn_wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000 #comprobar ID usuario
+      - PGID=1000 #comprobar ID grupo del usuario
+      - TZ=Europe/Madrid #cambiar dependiendo zona 
+      - SERVERURL= '' #opcional
+      - SERVERPORT='' #opcional
+      - PEERS=3 #opcional
+      - PEERDNS=auto #opcional
+      - INTERNAL_SUBNET='' #opcional
+    volumes:
+      - ./root/wireguard:/config
+      - ./lib/modules:/lib/modules
+      - ./usr/src:/usr/src
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: always
+
+

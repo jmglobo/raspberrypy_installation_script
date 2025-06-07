@@ -1,0 +1,31 @@
+services:
+  odoo17:
+    # image: odoo:17
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: c_odoo
+    ports:
+      - "8069:8069"
+    tty: true
+    command: --dev=reload
+    volumes:
+      - ./filestore:/usr/lib/python3/dist-packages/odoo/filestore
+      - ./extra-addons:/usr/lib/python3/dist-packages/odoo/extra-addons
+      - ./config/odoo.conf:/etc/odoo/odoo.conf
+      - ./odoo.log:/usr/lib/python3/dist-packages/odoo/odoo.log
+    networks:
+      - postgres_default
+    external_links:
+      - c_postgres
+    restart: always
+
+networks:
+  postgres_default:
+    external: true
+
+
+
+
+
+
