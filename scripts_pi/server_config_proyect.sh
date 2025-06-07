@@ -260,12 +260,6 @@ sudo docker-compose up -d
 cd $ODOO_DIR
 sudo docker-compose up -d
 
-# Bot_Machines_Notifications_interface Container
-cd $BOT_NOTIFICATIONS_DIR
-sudo docker-compose up -d
-echo "Docker containers started"
-echo "------------------------------------------------"
-
 # Restrict permissions to docker group and root
 chown root:docker /var/run/docker.sock
 chmod 660 /var/run/docker.sock
